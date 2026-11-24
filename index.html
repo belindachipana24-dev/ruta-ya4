@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123f33">
+  <meta name="description" content="RUTA YA: información de la ruta T28 Congata–La Merced, mapa local, comercios y avisos comunitarios.">
+  <title>RUTA YA | Congata</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio" data-view-link="inicio" aria-label="RUTA YA, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 72 72">
+            <defs>
+              <linearGradient id="busGlass" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#effbf0"/>
+                <stop offset="1" stop-color="#a9d7b4"/>
+              </linearGradient>
+            </defs>
+            <circle cx="36" cy="36" r="34" fill="#123f33"/>
+            <path d="M7 53c11-9 19-10 29-3s18 6 29-3" fill="none" stroke="#81bd91" stroke-width="4" stroke-linecap="round"/>
+            <path d="M12 59h48" stroke="#f5ddb0" stroke-width="2.4" stroke-linecap="round"/>
+            <g transform="translate(12 13)">
+              <path d="M5 12c0-5 3-8 8-8h27c5 0 8 3 8 8v27H5z" fill="#f4f6ed"/>
+              <path d="M11 10h31v13H11z" fill="url(#busGlass)"/>
+              <path d="M11 27h31v7H11z" fill="#e8bd72"/>
+              <path d="M48 17h5l4 9v9h-7" fill="#f4f6ed"/>
+              <circle cx="16" cy="40" r="5" fill="#1d3028" stroke="#b8d9bf" stroke-width="2"/>
+              <circle cx="40" cy="40" r="5" fill="#1d3028" stroke="#b8d9bf" stroke-width="2"/>
+            </g>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>RUTA YA</strong>
+          <small>CONGATA · UCHUMAYO</small>
+        </span>
+      </a>
+
+      <div class="top-actions">
+        <span class="connection-pill">
+          <i id="onlineDot" class="status-dot"></i>
+          <span id="onlineLabel">Comprobando</span>
+        </span>
+        <button class="avatar-btn" id="openProfileBtn" aria-label="Abrir perfil">
+          <span id="avatarInitial">U</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="main-content">
+
+      <!-- INICIO -->
+      <section class="view active" id="view-inicio" aria-labelledby="homeTitle">
+        <div class="welcome-line">
+          <div>
+            <p class="eyebrow">TU COMUNIDAD, MÁS CERCA</p>
+            <h1 id="homeTitle">Hola, <span id="homeUserName">vecino</span></h1>
+            <p class="muted">Tu información de movilidad y servicios locales.</p>
+          </div>
+          <button class="icon-button" id="editNameBtn" aria-label="Editar nombre">✎</button>
+        </div>
+
+        <article class="hero-card">
+          <img
+            src="https://radioyaravi.org.pe/wp-content/uploads/2024/09/20200706-182515_Arequipa-unidades-de-transporte-p-blico-que-cumplan-con-protocolos-de-bioseguridad-pueden-circular.jpg"
+            alt="Fotografía de archivo de un vehículo de Megabus AQP con letrero Congata–Tiabaya, publicada por Radio Yaraví en 2020"
+            onerror="this.src='https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1200&q=80'">
+          <div class="hero-shade"></div>
+          <div class="hero-content">
+            <span class="hero-chip">MOVILIDAD LOCAL</span>
+            <h2>Congata se mueve<br>contigo.</h2>
+            <p>Consulta el recorrido publicado de la T28 y descubre servicios de tu comunidad.</p>
+            <button class="button button-light" data-go="mapa">Explorar mapa <span>→</span></button>
+          </div>
+          <span class="photo-credit">Fotografía de archivo 2020 · no confirma la flota actual ni la T28</span>
+        </article>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TRANSPORTE PÚBLICO</p>
+            <h2>Tu ruta principal</h2>
+          </div>
+          <button class="text-button" data-go="ruta">Ver recorrido →</button>
+        </div>
+
+        <article class="route-preview card-surface">
+          <div class="route-symbol">T28</div>
+          <div class="route-preview-main">
+            <strong>Congata <span class="arrow-inline">↔</span> La Merced</strong>
+            <p>Megabus AQP S.A.C. · Unidad de negocio C-10</p>
+            <div class="tag-row">
+              <span class="tag tag-green">37 paraderos de ida</span>
+              <span class="tag">39 de retorno</span>
+            </div>
+          </div>
+          <button class="round-arrow" data-go="ruta" aria-label="Abrir ruta T28">›</button>
+        </article>
+
+        <div class="notice-strip">
+          <span class="notice-icon">i</span>
+          <div>
+            <strong>Información de operación pendiente de confirmar</strong>
+            <p>La ficha pública del recorrido fue editada en febrero de 2023. Esta app no inventa horarios, tarifa ni ubicación actual de las unidades.</p>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ALREDEDOR DE TI</p>
+            <h2>Comercios locales</h2>
+          </div>
+          <button class="text-button" data-go="comercios">Ver directorio →</button>
+        </div>
+        <div class="mini-commerce-grid" id="homeCommerce"></div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AVISOS DE MOVILIDAD</p>
+            <h2>Información y reportes</h2>
+          </div>
+          <button class="text-button" data-go="mapa">Reportar +</button>
+        </div>
+
+        <article class="community-card">
+          <img
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=82"
+            alt="Vía urbana, foto referencial; no representa una incidencia activa"
+            loading="lazy">
+          <div>
+            <span class="tag tag-green">ESTADO DE LA INFORMACIÓN</span>
+            <h3>No hay alertas de transporte verificadas cargadas</h3>
+            <p>El prototipo no recibe avisos oficiales en tiempo real del operador. Las fotografías ilustrativas no representan bloqueos ni accidentes actuales.</p>
+            <a href="https://wikiroutes.info/es/arequipa?routes=64741" target="_blank" rel="noopener">Consultar ficha pública T28 ↗</a>
+          </div>
+        </article>
+
+        <div class="report-summary" id="homeReports">
+          <strong>Aún no hay reportes guardados.</strong>
+          <span>Los reportes de prueba se conservan solo en tu dispositivo.</span>
+        </div>
+
+        <article class="premium-banner">
+          <div class="premium-icon">✦</div>
+          <div>
+            <span class="eyebrow premium-eyebrow">SERVICIO DIGITAL PROPUESTO</span>
+            <h2>RUTA YA Premium</h2>
+            <p>Funciones avanzadas para una futura etapa, sujetas a convenios, GPS oficial y validación del operador.</p>
+            <button class="button button-premium" data-go="perfil">Conocer beneficios →</button>
+          </div>
+        </article>
+      </section>
+
+      <!-- MAPA -->
+      <section class="view" id="view-mapa" aria-labelledby="mapTitle">
+        <div class="page-heading">
+          <p class="eyebrow">ORIENTACIÓN LOCAL</p>
+          <h1 id="mapTitle">Mapa inteligente</h1>
+          <p class="muted">Mapa base de OpenStreetMap con referencias cartográficas y GPS de tu dispositivo.</p>
+        </div>
+
+        <div class="map-search-row">
+          <label class="search-box">
+            <span>⌕</span>
+            <input id="mapSearchInput" type="search" placeholder="Buscar dirección o lugar...">
+          </label>
+          <button class="button button-dark" id="mapSearchBtn">Buscar</button>
+        </div>
+
+        <div class="map-status-row">
+          <span id="gpsDot" class="map-status-dot"></span>
+          <span id="gpsStatus">Ubicación desactivada</span>
+          <b id="gpsAccuracy" class="accuracy-label">—</b>
+        </div>
+
+        <div class="map-frame">
+          <div id="map" role="application" aria-label="Mapa de Congata y Uchumayo"></div>
+          <div class="map-quick-controls">
+            <button id="locateBtn" title="Activar mi ubicación" aria-label="Activar mi ubicación">◎</button>
+            <button id="mapZoomIn" title="Acercar" aria-label="Acercar">＋</button>
+            <button id="mapZoomOut" title="Alejar" aria-label="Alejar">−</button>
+          </div>
+          <div class="map-attribution-note">© OpenStreetMap contributors</div>
+        </div>
+
+        <div class="map-legend">
+          <span><i class="legend-dot legend-known"></i>Punto con coordenada conocida</span>
+          <span><i class="legend-dot legend-user"></i>Tu ubicación GPS</span>
+        </div>
+
+        <a class="route-map-link" href="https://wikiroutes.info/es/arequipa?routes=64741" target="_blank" rel="noopener">
+          Abrir el mapa publicado de la T28 en Wikiroutes ↗
+        </a>
+
+        <div class="map-tools-grid">
+          <button class="map-tool" id="baseLayerBtn">
+            <span>▧</span>
+            <b>Cambiar estilo</b>
+            <small>Estándar / claro</small>
+          </button>
+          <button class="map-tool" id="fitKnownBtn">
+            <span>⌖</span>
+            <b>Referencias</b>
+            <small>Ver puntos conocidos</small>
+          </button>
+          <button class="map-tool" data-go="ruta">
+            <span>⇄</span>
+            <b>Ruta T28</b>
+            <small>Paraderos publicados</small>
+          </button>
+        </div>
+
+        <div class="notice-strip">
+          <span class="notice-icon">!</span>
+          <div>
+            <strong>Precisión y límites del mapa</strong>
+            <p>Los pines verdes solo corresponden a coordenadas identificadas. No hay coordenadas confirmadas para los 37/39 paraderos ni señal GPS del operador; por eso no se dibuja una línea de bus inventada.</p>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">REFERENCIAS CARTOGRÁFICAS</p>
+            <h2>Puntos identificados</h2>
+          </div>
+        </div>
+        <div id="knownPlacesList" class="known-places-list"></div>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">PARTICIPA</p>
+            <h2>Reportar una incidencia</h2>
+          </div>
+        </div>
+
+        <form class="report-form card-surface" id="reportForm">
+          <label>
+            Tipo de reporte
+            <select id="reportType" required>
+              <option value="">Selecciona una opción</option>
+              <option>Demora observada</option>
+              <option>Desvío observado</option>
+              <option>Paradero no accesible</option>
+              <option>Vía bloqueada</option>
+              <option>Otro aviso</option>
+            </select>
+          </label>
+          <label>
+            Zona o referencia
+            <input id="reportPlace" type="text" maxlength="90" placeholder="Ej. Plaza de Álvarez Thomas" required>
+          </label>
+          <label>
+            Descripción
+            <textarea id="reportDescription" rows="3" maxlength="350" placeholder="Describe lo que observaste. No incluyas datos personales." required></textarea>
+          </label>
+          <label class="file-label">
+            Fotografía opcional
+            <input id="reportPhoto" type="file" accept="image/*">
+            <small>Se reducirá de tamaño y se guardará localmente. No se enviará a otros usuarios.</small>
+          </label>
+          <button class="button button-primary button-wide" type="submit">Guardar reporte</button>
+          <p class="fine-print">Este prototipo no tiene servidor de reportes. No lo uses para emergencias; contacta a las autoridades correspondientes.</p>
+        </form>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">TUS REGISTROS</p>
+            <h2>Reportes guardados</h2>
+          </div>
+        </div>
+        <div id="reportsList" class="reports-list"></div>
+      </section>
+
+      <!-- RUTA -->
+      <section class="view" id="view-ruta" aria-labelledby="routeTitle">
+        <div class="page-heading">
+          <p class="eyebrow">SISTEMA INTEGRADO DE TRANSPORTE</p>
+          <h1 id="routeTitle">Ruta T28</h1>
+          <p class="muted">Recorrido publicado de Megabus AQP S.A.C.</p>
+        </div>
+
+        <div class="route-hero card-surface">
+          <div class="route-big-number">T28</div>
+          <div>
+            <span class="tag tag-green">RUTA ESTRUCTURANTE</span>
+            <h2>Congata <span>↔</span> La Merced</h2>
+            <p>Unidad de negocio C-10 · Arequipa</p>
+          </div>
+        </div>
+
+        <div class="route-facts-grid">
+          <div class="fact-box"><strong>37</strong><span>Paraderos publicados de ida</span></div>
+          <div class="fact-box"><strong>39</strong><span>Paraderos publicados de retorno</span></div>
+          <div class="fact-box"><strong>GPS</strong><span>Sin feed del operador</span></div>
+        </div>
+
+        <div class="route-warning">
+          <strong>Horario y tarifa: confirmar con el operador</strong>
+          <p>La ficha consultada muestra 05:00–20:00 y S/ 1, pero indica última edición 24/02/2023. No se presentan como valores actuales verificados en 2026.</p>
+        </div>
+
+        <div class="route-meta-grid">
+          <div><span>Operador listado</span><b>Megabus AQP S.A.C.</b></div>
+          <div><span>Unidad de negocio</span><b>C-10 · SIT</b></div>
+          <div><span>Autorización indicada</span><b>SITransporte – MPA</b></div>
+        </div>
+
+        <div class="direction-switch">
+          <button class="direction-btn active" id="outboundBtn" data-direction="outbound">
+            Congata → La Merced
+            <small>37 paraderos</small>
+          </button>
+          <button class="direction-btn" id="inboundBtn" data-direction="inbound">
+            La Merced → Congata
+            <small>39 paraderos</small>
+          </button>
+        </div>
+
+        <label class="stop-search">
+          <span>⌕</span>
+          <input id="stopSearchInput" type="search" placeholder="Buscar un paradero...">
+        </label>
+
+        <div class="stop-list-header">
+          <strong id="stopCountLabel">37 paraderos</strong>
+          <span>Orden de la ficha</span>
+        </div>
+        <ol class="stop-list" id="stopList"></ol>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">RECORRIDO VIAL PUBLICADO</p>
+            <h2>Calles y avenidas</h2>
+          </div>
+        </div>
+
+        <div class="road-itinerary card-surface">
+          <h3>Ida: Congata → La Merced</h3>
+          <p>Av. Álvarez Thomas (Urb. Álvarez Thomas Sector 1) → Av. Canadá → calle Toquepala → calle Condoroma → calle Orcopampa → Av. Cerro Verde → Av. Panamericana → Av. Arancota → Puente Tingo → Av. Alfonso Ugarte → Av. Parra → Av. Salaverry.</p>
+          <hr>
+          <h3>Retorno: La Merced → Congata</h3>
+          <p>Av. Tacna y Arica → calle sin nombre (Parque Melgar) → Av. Parra → Av. Alfonso Ugarte → Puente Tingo → Av. Arancota → Av. Panamericana → Av. Cerro Verde → calle Condoroma → calle Orcopampa → calle Toquepala → Av. Canadá → Av. Álvarez Thomas (Urb. Álvarez Thomas Sector 1).</p>
+          <a href="https://wikiroutes.info/es/arequipa?routes=64741" target="_blank" rel="noopener">Abrir ficha pública de la T28 ↗</a>
+        </div>
+
+        <div class="notice-strip">
+          <span class="notice-icon">i</span>
+          <div>
+            <strong>¿Por qué la app no muestra la combi en movimiento?</strong>
+            <p>Se necesita un acuerdo con Megabus y acceso al GPS de cada unidad. La versión actual no tiene ese sistema y no calcula llegadas reales.</p>
+          </div>
+        </div>
+        <p class="source-note">Fuente de la ruta y las listas: ficha colaborativa de Wikiroutes. Última edición indicada: 24 de febrero de 2023. Validar cambios con el operador o la autoridad de transporte.</p>
+      </section>
+
+      <!-- COMERCIOS -->
+      <section class="view" id="view-comercios" aria-labelledby="commerceTitle">
+        <div class="page-heading">
+          <p class="eyebrow">ECONOMÍA LOCAL</p>
+          <h1 id="commerceTitle">Comercios de la zona</h1>
+          <p class="muted">Directorio de lugares identificados en Congata, Cerro Verde y Uchumayo.</p>
+        </div>
+
+        <label class="search-box commerce-search">
+          <span>⌕</span>
+          <input type="search" id="commerceSearch" placeholder="Buscar negocio, producto o zona...">
+        </label>
+
+        <div class="filter-row" id="commerceFilters">
+          <button class="filter-chip active" data-category="Todos">Todos</button>
+          <button class="filter-chip" data-category="Restaurantes">Restaurantes</button>
+          <button class="filter-chip" data-category="Mercados">Mercados</button>
+          <button class="filter-chip" data-category="Tiendas">Tiendas</button>
+          <button class="filter-chip" data-category="Servicios">Servicios</button>
+          <button class="filter-chip" data-category="Cafés">Cafés</button>
+        </div>
+
+        <p class="results-caption" id="commerceResultsCaption">Lugares identificados en fuentes públicas</p>
+        <div class="commerce-grid" id="commerceGrid"></div>
+
+        <div class="notice-strip">
+          <span class="notice-icon">i</span>
+          <div>
+            <strong>Las fichas no sustituyen la confirmación del negocio</strong>
+            <p>Los directorios pueden estar desactualizados. Teléfonos, horarios, precios, stock y menús se deben confirmar. Las fotos de stock son referenciales y no son fotos del establecimiento.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERFIL -->
+      <section class="view" id="view-perfil" aria-labelledby="profileTitle">
+        <div class="page-heading">
+          <p class="eyebrow">TU CUENTA</p>
+          <h1 id="profileTitle">Mi perfil</h1>
+          <p class="muted">Personaliza RUTA YA en este dispositivo.</p>
+        </div>
+
+        <article class="profile-card card-surface">
+          <div class="profile-avatar" id="profileAvatar">U</div>
+          <div class="profile-details">
+            <strong id="profileName">Usuario</strong>
+            <span>Sesión local · no hay cuenta en servidor</span>
+            <button class="text-button" id="profileEditBtn">Editar nombre</button>
+          </div>
+        </article>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">PROPUESTA DIGITAL</p>
+            <h2>RUTA YA Premium</h2>
+          </div>
+          <span class="tag tag-gold">NO ACTIVADO</span>
+        </div>
+
+        <article class="premium-detail-card">
+          <div class="premium-detail-head">
+            <span class="premium-icon">✦</span>
+            <div>
+              <span class="eyebrow premium-eyebrow">SERVICIO FUTURO</span>
+              <h2>Premium</h2>
+              <p>Suscripción digital propuesta para una futura versión.</p>
+            </div>
+          </div>
+
+          <div class="premium-benefits">
+            <div><i>✓</i><span>Alertas de llegada cuando exista GPS oficial instalado en las unidades.</span></div>
+            <div><i>✓</i><span>Notificaciones verificadas sobre desvíos y cambios de recorrido.</span></div>
+            <div><i>✓</i><span>Favoritos y accesos rápidos a paraderos y comercios.</span></div>
+            <div><i>✓</i><span>Ofertas de comercios solo si se firman convenios y se verifican los descuentos.</span></div>
+            <div><i>✓</i><span>Opciones de accesibilidad y preferencias de viaje.</span></div>
+          </div>
+
+          <div class="premium-disclaimer">
+            <b>Importante:</b> la T28 no está descrita en la fuente como un servicio de transporte premium. “RUTA YA Premium” es una propuesta de funciones digitales, no una categoría de combi ni una suscripción ya vendida por Megabus. Este prototipo no cobra dinero ni activa beneficios.
+          </div>
+          <button class="button button-premium button-wide" id="premiumInfoBtn">Ver alcance del plan</button>
+        </article>
+
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">PREFERENCIAS</p>
+            <h2>Tu aplicación</h2>
+          </div>
+        </div>
+
+        <div class="settings-list card-surface">
+          <button id="installAppBtn" class="setting-row">
+            <span class="setting-icon">▣</span>
+            <span><strong>Instalar RUTA YA</strong><small>Añadir a la pantalla de inicio</small></span>
+            <b>›</b>
+          </button>
+          <button id="favoritesBtn" class="setting-row">
+            <span class="setting-icon">♡</span>
+            <span><strong>Mis comercios favoritos</strong><small id="favoritesCount">0 guardados</small></span>
+            <b>›</b>
+          </button>
+          <button id="clearLocalBtn" class="setting-row">
+            <span class="setting-icon">⌫</span>
+            <span><strong>Borrar mis datos locales</strong><small>Nombre, favoritos y reportes guardados aquí</small></span>
+            <b>›</b>
+          </button>
+        </div>
+
+        <div class="about-card">
+          <strong>RUTA YA · Prototipo de movilidad local</strong>
+          <p>Proyecto demostrativo independiente. No es una aplicación oficial de Megabus AQP S.A.C. ni de la Municipalidad Provincial de Arequipa.</p>
+          <span>Versión 3.0 · Congata, Uchumayo, Arequipa</span>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <button class="nav-item active" data-nav="inicio"><span class="nav-icon">⌂</span><small>Inicio</small></button>
+      <button class="nav-item" data-nav="mapa"><span class="nav-icon">⌖</span><small>Mapa</small></button>
+      <button class="nav-item" data-nav="ruta"><span class="nav-icon">⇄</span><small>Ruta</small></button>
+      <button class="nav-item" data-nav="comercios"><span class="nav-icon">▦</span><small>Comercios</small></button>
+      <button class="nav-item" data-nav="perfil"><span class="nav-icon">◉</span><small>Perfil</small></button>
+    </nav>
+  </div>
+
+  <!-- Modal de bienvenida y nombre -->
+  <div class="modal-backdrop" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <form class="welcome-modal" id="welcomeForm">
+      <div class="welcome-logo">
+        <span class="brand-mark">
+          <svg viewBox="0 0 72 72" aria-hidden="true">
+            <circle cx="36" cy="36" r="34" fill="#123f33"/>
+            <path d="M7 53c11-9 19-10 29-3s18 6 29-3" fill="none" stroke="#81bd91" stroke-width="4" stroke-linecap="round"/>
+            <path d="M12 59h48" stroke="#f5ddb0" stroke-width="2.4"/>
+            <g transform="translate(12 13)">
+              <path d="M5 12c0-5 3-8 8-8h27c5 0 8 3 8 8v27H5z" fill="#f4f6ed"/>
+              <path d="M11 10h31v13H11z" fill="#cfe9d3"/>
+              <path d="M11 27h31v7H11z" fill="#e8bd72"/>
+              <circle cx="16" cy="40" r="5" fill="#1d3028"/>
+              <circle cx="40" cy="40" r="5" fill="#1d3028"/>
+            </g>
+          </svg>
+        </span>
+      </div>
+      <p class="eyebrow">BIENVENIDO A TU COMUNIDAD</p>
+      <h1 id="welcomeTitle">Tu camino,<br>más sencillo.</h1>
+      <p>Escribe tu nombre para personalizar tu experiencia de RUTA YA.</p>
+      <label class="welcome-input-label">
+        ¿Cómo te llamas?
+        <input id="welcomeNameInput" type="text" maxlength="32" placeholder="Tu nombre" autocomplete="given-name" required>
+      </label>
+      <button class="button button-primary button-wide" type="submit">Entrar a RUTA YA →</button>
+      <small>Tu nombre se guarda solamente en este dispositivo.</small>
+    </form>
+  </div>
+
+  <!-- Modal con detalle de negocio -->
+  <div class="modal-backdrop modal-hidden" id="commerceModal" role="dialog" aria-modal="true" aria-labelledby="commerceModalTitle">
+    <div class="commerce-modal">
+      <button class="modal-close" id="closeCommerceModal" aria-label="Cerrar">×</button>
+      <div id="commerceModalContent"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

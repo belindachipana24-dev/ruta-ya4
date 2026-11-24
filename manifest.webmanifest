@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "RUTA YA - Congata",
+  "short_name": "RUTA YA",
+  "description": "Ruta T28, mapa y comercios de Congata y Uchumayo, Arequipa.",
+  "lang": "es-PE",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f8f3",
+  "theme_color": "#123f33",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

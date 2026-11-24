@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="512"
+     height="512"
+     viewBox="0 0 180 180">
+
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#205d46"/>
+      <stop offset="100%" stop-color="#0c3027"/>
+    </linearGradient>
+
+    <linearGradient id="ventana" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d5f0dc"/>
+      <stop offset="100%" stop-color="#80bd96"/>
+    </linearGradient>
+
+    <linearGradient id="carroceria" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e2e9df"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo del icono -->
+  <circle cx="90" cy="90" r="86"
+          fill="url(#fondo)"
+          stroke="#a7d6ae"
+          stroke-width="2"/>
+
+  <!-- Carretera -->
+  <path d="M17 137
+           C48 111 73 111 96 128
+           C119 145 144 142 163 122"
+        fill="none"
+        stroke="#83c393"
+        stroke-width="9"
+        stroke-linecap="round"/>
+
+  <path d="M22 151 H158"
+        fill="none"
+        stroke="#e8c77f"
+        stroke-width="3"
+        stroke-linecap="round"/>
+
+  <!-- Combi -->
+  <g transform="translate(28 35)">
+
+    <!-- Carrocería -->
+    <path d="M17 43
+             Q17 29 33 29
+             H94
+             Q109 29 115 45
+             L124 77
+             V103
+             H9
+             V55
+             Q9 46 17 43Z"
+          fill="url(#carroceria)"
+          stroke="#c7ddcc"
+          stroke-width="3"/>
+
+    <!-- Parabrisas y ventanas -->
+    <path d="M31 37
+             H91
+             Q101 37 105 48
+             L111 68
+             H23
+             V47
+             Q23 37 31 37Z"
+          fill="url(#ventana)"/>
+
+    <!-- Separación de ventanas -->
+    <path d="M66 38 V67"
+          stroke="#3f7354"
+          stroke-width="3"/>
+
+    <!-- Línea decorativa -->
+    <path d="M22 76 H111 V91 H22Z"
+          fill="#dba85f"/>
+
+    <path d="M22 77 H111"
+          stroke="#ffffff"
+          stroke-width="2"
+          opacity=".8"/>
+
+    <!-- Luces -->
+    <rect x="12" y="81" width="9" height="6"
+          rx="2" fill="#f3d98c"/>
+
+    <rect x="112" y="81" width="9" height="6"
+          rx="2" fill="#e78f79"/>
+
+    <!-- Parachoques -->
+    <path d="M9 96 H124"
+          stroke="#b7c9ba"
+          stroke-width="4"
+          stroke-linecap="round"/>
+
+    <!-- Ruedas -->
+    <circle cx="35" cy="104" r="12"
+            fill="#172b23"
+            stroke="#d7e8d9"
+            stroke-width="4"/>
+
+    <circle cx="100" cy="104" r="12"
+            fill="#172b23"
+            stroke="#d7e8d9"
+            stroke-width="4"/>
+
+    <circle cx="35" cy="104" r="4" fill="#a9c4ae"/>
+    <circle cx="100" cy="104" r="4" fill="#a9c4ae"/>
+
+  </g>
+
+  <!-- Marcador de ubicación -->
+  <path d="M135 23
+           C135 13 143 7 153 7
+           C164 7 172 15 172 26
+           C172 40 153 56 153 56
+           C153 56 135 40 135 23Z"
+        fill="#e8c77f"
+        stroke="#fff1cc"
+        stroke-width="2"/>
+
+  <circle cx="153" cy="26" r="6"
+          fill="#174b38"/>
+
+</svg>
